@@ -5,6 +5,25 @@ from django.http import JsonResponse # JSON 응답
 from map.models import Point
 from django.forms.models import model_to_dict
 
+def contact(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        comment = request.POST.get('comment')
+        # 발신자주소, 수신자주소, 메시지
+        send_mail('010wodnjs@gamil.com', email, comment)
+        return render(request, 'contact_success.html')
+    return render(request, 'contact.html')
+import smtplib
+from email.mime.text import MIMEText
+    def send_mail(from_email, to_email, msg):
+        smtp = smtplib.SMTP_SSL('smtp.gmail.com', 465) # SMTP 설정
+        smtp.login(from_email, 'xynzxitkbwfjngpj') # 인증정보 설정
+        msg = MIMEText(msg)
+        msg['Subject'] = '[문의사항]' + to_email # 제목
+        msg['To'] = from_email # 수신 이메일
+        smtp.sendmail(from_email, from_email, msg.as_string())
+        smtp.quit()
+
 def map_data(request):
     data = Point.objects.all()
     map_list = []
