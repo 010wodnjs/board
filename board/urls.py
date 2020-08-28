@@ -18,6 +18,9 @@ from django.urls import path
 import board.views as views
 
 urlpatterns = [
+    path('map/', views.map),
+    path('map_data/', views.map_data),
+
     path('admin/', admin.site.urls),
     
     path('index/', views.index),
