@@ -21,6 +21,9 @@ urlpatterns = [
     path('map/', views.map),
     path('map_data/', views.map_data),
 
+    path('contact/', views.contact),
+
+
     path('admin/', admin.site.urls),
     
     path('index/', views.index),
